@@ -20,13 +20,13 @@ export default function Main(){
         },
         {
             id:2,
-            titulo:"Transformers Maiza",
+            titulo:"Transformers e o Cu",
             sinopse:"Depois de ser expulsa da Barbieland por ser uma boneca de aparência menos do que perfeita, Barbie parte para o mundo humano em busca da verdadeira felicidade.",
             imagem:"/transformes.jpeg"
         },
         {
             id:3,
-            titulo:"Transformers Maiza",
+            titulo:"Transformers",
             sinopse:"Depois de ser expulsa da Barbieland por ser uma boneca de aparência menos do que perfeita, Barbie parte para o mundo humano em busca da verdadeira felicidade.",
             imagem:"/transformes.jpeg"
         }
