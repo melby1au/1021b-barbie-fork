@@ -1,37 +1,31 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Filme from "../filme/Filme";
 import './Main.css'
+import axios from 'axios'
 type FilmesType = {
     id: number,
     titulo:string,
-    sinopse:string,
+    descricao:string,
     imagem:string
-}
+};
+const URL_API = 'http://localhost:3000/filmes'
 export default function Main(){
     //Hook
     const [texto,setTexto] = useState("")
+    const [filmes, setFilmes] = useState<FilmesType[]>([]);
 
-    const filmes:FilmesType[] = [
-        {
-            id:1,
-            titulo:"Barbie",
-            sinopse:"Depois de ser expulsa da Barbieland por ser uma boneca de aparência menos do que perfeita, Barbie parte para o mundo humano em busca da verdadeira felicidade.",
-            imagem:"/barbie.png"
-        },
-        {
-            id:2,
-            titulo:"Transformers e o Cu",
-            sinopse:"Depois de ser expulsa da Barbieland por ser uma boneca de aparência menos do que perfeita, Barbie parte para o mundo humano em busca da verdadeira felicidade.",
-            imagem:"/transformes.jpeg"
-        },
-        {
-            id:3,
-            titulo:"Transformers",
-            sinopse:"Depois de ser expulsa da Barbieland por ser uma boneca de aparência menos do que perfeita, Barbie parte para o mundo humano em busca da verdadeira felicidade.",
-            imagem:"/transformes.jpeg"
-        }
+    useEffect(() =>{
+        const buscaFilme = async() => {
+            try{
+                const resposta = await axios.get<FilmesType[]>(URL_API);
+                setFilmes(resposta.data);
+            }catch(error){
+                console.log('erro')
+            }
+        };
+        buscaFilme();
+    },[]);
 
-    ]
     //A função recebe um atributo chamado e de "event"
     function mudaTexto(e:React.ChangeEvent<HTMLInputElement>){
         console.log(e.target.value)
@@ -53,7 +47,7 @@ export default function Main(){
                 .map((filme:FilmesType)=>
                     <Filme key={filme.id} 
                            titulo={filme.titulo} 
-                           sinopse={filme.sinopse} 
+                           descricao={filme.descricao} 
                            imagem={filme.imagem}
                     />
                     )
